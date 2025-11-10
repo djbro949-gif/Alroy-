@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Church Mass Offering</title>
+<style>
+  *{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+  body{background:#f4f6fa;margin:0;padding:0;display:flex;justify-content:center;align-items:center;height:100vh}
+  .card{background:#fff;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,0.2);padding:30px;max-width:400px;width:90%;text-align:center;transition:all .4s}
+  h1{margin-bottom:10px;color:#1e3a8a}
+  button{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer;font-size:16px;margin-top:15px}
+  button:hover{background:#1e40af}
+  input,select{width:100%;padding:10px;margin-top:6px;margin-bottom:12px;border:1px solid #d1d5db;border-radius:6px;font-size:14px}
+  .hidden{display:none}
+  .summary{text-align:left}
+  .summary p{margin:6px 0}
+</style>
+</head>
+<body>
+
+<div class="card" id="page1">
+  <h1>Welcome to<br>DEVANAHALLI DAVAMATHAYA DAVALAUA</h1>
+  <p>Powered by ChatGPT, WEBCODE</p>
+  <button onclick="nextPage(2)">PRESS TO START</button>
+</div>
+
+<div class="card hidden" id="page2">
+  <h1>Mass Offering</h1>
+  <input id="name" type="text" placeholder="Your Name">
+  <input id="intention" type="text" placeholder="Intention">
+  <input id="date" type="date" placeholder="xxxx">
+  <select id="amountMode">
+    <option value="">Select Amount Mode</option>
+    <option>GPay</option>
+    <option>Cash</option>
+  </select>
+  <button onclick="showSummary()">DONE</button>
+</div>
+
+<div class="card hidden" id="page3">
+  <h1>Confirm Details</h1>
+  <div class="summary">
+    <p><strong>Name:</strong> <span id="sName"></span></p>
+    <p><strong>Intention:</strong> <span id="sIntention"></span></p>
+    <p><strong>Date:</strong> <span id="sDate"></span></p>
+    <p><strong>Amount Mode:</strong> <span id="sAmount"></span></p>
+  </div>
+  <div style="display:flex;justify-content:space-between;margin-top:20px">
+    <button onclick="backToForm()">Back & Edit</button>
+    <button onclick="nextPage(4)">Done</button>
+  </div>
+</div>
+
+<div class="card hidden" id="page4">
+  <h1>Thank You 🙏 </h1>
+  <p>Your Mass intention has been recorded.</p>
+  <p>special thanks to chartgpt ,webcode</p>
+</div>
+
+<script>
+function nextPage(n){
+  document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));
+  document.getElementById('page'+n).classList.remove('hidden');
+}
+function showSummary(){
+  const name=document.getElementById('name').value.trim();
+  const intention=document.getElementById('intention').value.trim();
+  const date=document.getElementById('date').value;
+  const amt=document.getElementById('amountMode').value;
+  if(!name||!intention||!date||!amt){alert("Please fill all fields");return;}
+  document.getElementById('sName').textContent=name;
+  document.getElementById('sIntention').textContent=intention;
+  document.getElementById('sDate').textContent=date;
+  document.getElementById('sAmount').textContent=amt;
+  nextPage(3);
+}
+function backToForm(){ nextPage(2); }
+</script>
+
+</body>
+</html>
